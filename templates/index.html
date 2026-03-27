@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>澳門超市格價（來來 vs 新苗）</title>
+</head>
+<body>
+    <h1>澳門超市格價</h1>
+
+    <input id="item" placeholder="輸入商品，例如：牛奶">
+    <button onclick="search()">搜尋</button>
+
+    <pre id="result"></pre>
+
+    <script>
+        function search() {
+            const item = document.getElementById("item").value;
+            fetch(`/compare?item=${encodeURIComponent(item)}`)
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById("result").textContent =
+                        JSON.stringify(data, null, 2);
+                });
+        }
+    </script>
+</body>
+</html>
